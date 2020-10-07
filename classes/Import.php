@@ -5,6 +5,7 @@ use Yaml;
 use DB;
 use Log;
 use Illuminate\Filesystem\Filesystem;
+use Cms\Classes\Theme;
 
 class Import
 {
@@ -101,6 +102,44 @@ class Import
 
             $dbmodel->save();
         }
+    }
+
+    /**
+     * Load the theme.yaml file
+     */
+    public function loadThemeSettingsFile()
+    {
+        $theme = Theme::getActiveTheme();
+        $path = $theme->getPath().'/';
+
+        $filename = 'theme';
+        $filename .= '.yaml';
+
+        if (!File::exists($path.$filename)) {
+            return NULL;
+        }
+
+        return (array)Yaml::parseFile($path.$filename);
+    }
+
+    /**
+     * Import settings from the theme.yaml file
+     */
+    public function importThemeSettings($code, $settings)
+    {
+        $result = $this->loadThemeSettingsFile();
+
+        if (!isset($result[$code])) {
+            return false;
+        }
+
+        foreach ($result[$code] as $key => $value) {
+            $settings->$key = $value;
+        }
+
+        $settings->save();
+
+        return true;
     }
 
 }

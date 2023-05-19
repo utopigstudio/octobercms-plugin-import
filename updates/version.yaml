@@ -1,4 +1,6 @@
-1.0.0:
+v1.0.0:
     - Import plugin
-1.0.1:
+v1.0.1:
     - Add option to load theme settings
+v1.0.2:
+    - Fix version number format for OctoberCMS v3

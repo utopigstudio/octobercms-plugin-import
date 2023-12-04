@@ -1,5 +1,5 @@
 {
-    "name": "utopigs/import",
+    "name": "utopigs/import-plugin",
     "type": "october-plugin",
     "description": "OctoberCMS plugin to simplify the import of data from php, yaml and xml files",
     "keywords": ["october", "octobercms", "import"],

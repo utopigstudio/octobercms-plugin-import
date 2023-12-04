@@ -4,3 +4,5 @@ v1.0.1:
     - Add option to load theme settings
 v1.0.2:
     - Fix version number format for OctoberCMS v3
+v1.0.3:
+    - Fix composer.json

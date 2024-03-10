@@ -93,7 +93,8 @@ class Import
                 if (!is_array($image_files)) $image_files = [$image_files];
                 foreach ($image_files as $image_file) {
                     try {
-                        $dbmodel->$attachmentField()->create(['data' => $this->path . $image_file]);
+                        $dbmodel->$attachmentField = (new \System\Models\File)->fromFile($this->path . $image_file);
+                        $dbmodel->save();
                     } catch (\Exception $e) {
                         Log::error($e->getMessage());
                     }

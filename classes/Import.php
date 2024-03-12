@@ -11,6 +11,11 @@ class Import
 {
     protected $path;
 
+    public function setPath($path)
+    {
+        $this->path = $path;
+    }
+
     /**
      * Load data from a file
      * 
@@ -20,6 +25,10 @@ class Import
      */
     public function loadImportFile($filename)
     {
+        if (!$this->path) {
+            throw new \Exception('Import path not set');
+        }
+
         if (!File::exists($this->path.$filename)) {
             return NULL;
         }

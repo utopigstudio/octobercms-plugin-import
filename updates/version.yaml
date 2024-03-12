@@ -1,10 +1,6 @@
-v1.0.0:
-    - Import plugin
-v1.0.1:
-    - Add option to load theme settings
-v1.0.2:
-    - Fix version number format for OctoberCMS v3
-v1.0.3:
-    - Fix composer.json
-v1.0.4:
-    - Fixes in demo data import for October CMS 3.6
+v1.0.0: Import plugin
+v1.0.1: Add option to load theme settings
+v1.0.2: Fix version number format for OctoberCMS v3
+v1.0.3: Fix composer.json
+v1.0.4: Fixes in demo data import for October CMS 3.6
+v1.0.5: Validate that import path is set

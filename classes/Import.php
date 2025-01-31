@@ -135,8 +135,12 @@ class Import
     /**
      * Import settings from the theme.yaml file
      */
-    public function importThemeSettings($code, $settings)
+    public function importThemeSettings($code, $settings, $reset = false)
     {
+        if ($reset) {
+            $settings = $this->resetSettings($settings);
+        }
+
         $result = $this->loadThemeSettingsFile();
 
         if (!isset($result[$code])) {
@@ -150,6 +154,18 @@ class Import
         $settings->save();
 
         return true;
+    }
+
+    protected function resetSettings($settings)
+    {
+        $record = $settings->getSettingsRecord();
+        if ($record) {
+            $settings->resetDefault();
+            $class = get_class($settings);
+            $settings = $class::instance();
+        }
+
+        return $settings;
     }
 
 }

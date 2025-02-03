@@ -120,6 +120,9 @@ class Import
     public function loadThemeSettingsFile()
     {
         $theme = Theme::getActiveTheme();
+        if (!$theme) {
+            return NULL;
+        }
         $path = $theme->getPath().'/';
 
         $filename = 'theme';

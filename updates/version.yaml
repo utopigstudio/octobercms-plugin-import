@@ -6,3 +6,4 @@ v1.0.4: Fixes in demo data import for October CMS 3.6
 v1.0.5: Validate that import path is set
 v1.0.6: Allow to reset settings when importing
 v1.0.7: Don't fail if trying to import and the configured theme is not found
+v1.0.8: Add createFile method

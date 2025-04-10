@@ -171,4 +171,15 @@ class Import
         return $settings;
     }
 
+    protected function createFile($file)
+    {
+        if (!is_array($file)) {
+            $file = ['file' => $file];
+        }
+        $newFile = (new \System\Models\File)->fromFile($this->path . $file['file']);
+        $newFile->title = $file['title'] ?? null;
+        $newFile->description = $file['description'] ?? null;
+
+        return $newFile;
+    }
 }

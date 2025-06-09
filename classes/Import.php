@@ -51,6 +51,10 @@ class Import
             return $xml;
         }
 
+        if ($type == 'json') {
+            return json_decode(File::get($this->path.$filename), true);
+        }
+
         return NULL;
     }
 

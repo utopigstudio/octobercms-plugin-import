@@ -6,6 +6,7 @@ use DB;
 use Log;
 use Illuminate\Filesystem\Filesystem;
 use Cms\Classes\Theme;
+use Config;
 
 class Import
 {
@@ -29,7 +30,8 @@ class Import
             throw new \Exception('Import path not set');
         }
 
-        if (!File::exists($this->path.$filename)) {
+        $filename = $this->getLocalizedFile($filename);
+        if (!$filename) {
             return NULL;
         }
 
@@ -185,5 +187,29 @@ class Import
         $newFile->description = $file['description'] ?? null;
 
         return $newFile;
+    }
+
+    protected function getLocalizedFile($filename)
+    {
+        if (!preg_match('/_[a-z]{2}\./i', $filename)) {
+            $fileParts = explode('.', $filename);
+            $locale = \App::getLocale();
+            $fallbackLocale = Config::get('app.fallback_locale', 'en');
+            $localizedFilename = $fileParts[0] .'_'. $locale .'.'.$fileParts[1];
+            if (File::exists($this->path.$localizedFilename)) {
+                return $localizedFilename;
+            } else {
+                $localizedFilename = $fileParts[0] .'_'. $fallbackLocale .'.'.$fileParts[1];
+                if (File::exists($this->path.$localizedFilename)) {
+                    return $localizedFilename;
+                }
+            }
+        }
+
+        if (!File::exists($this->path.$filename)) {
+            return null;
+        }
+
+        return $filename;
     }
 }
